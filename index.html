@@ -53,9 +53,62 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        body[data-theme="light"] {
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+        body[data-theme="light"] .bg-glow {
+            background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, rgba(255,255,255,0) 70%);
+        }
+        body[data-theme="light"] .bg-slate-950,
+        body[data-theme="light"] .bg-slate-950\/80 {
+            background-color: rgba(255, 255, 255, 0.92);
+        }
+        body[data-theme="light"] .bg-slate-900,
+        body[data-theme="light"] .bg-slate-900\/30,
+        body[data-theme="light"] .bg-slate-900\/50,
+        body[data-theme="light"] .bg-slate-900\/80 {
+            background-color: #f8fafc;
+        }
+        body[data-theme="light"] .bg-slate-800,
+        body[data-theme="light"] .bg-slate-800\/50 {
+            background-color: #f1f5f9;
+        }
+        body[data-theme="light"] .border-slate-800,
+        body[data-theme="light"] .border-slate-800\/50,
+        body[data-theme="light"] .border-slate-700,
+        body[data-theme="light"] .border-slate-700\/50 {
+            border-color: #e2e8f0;
+        }
+        body[data-theme="light"] .text-white {
+            color: #0f172a;
+        }
+        body[data-theme="light"] .text-gray-300,
+        body[data-theme="light"] .text-slate-300,
+        body[data-theme="light"] .text-slate-400 {
+            color: #475569;
+        }
+        body[data-theme="light"] .text-slate-500 {
+            color: #64748b;
+        }
+        body[data-theme="light"] .text-blue-300,
+        body[data-theme="light"] .text-blue-400 {
+            color: #1d4ed8;
+        }
+        body[data-theme="light"] .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: #e2e8f0;
+        }
+        body[data-theme="light"] a.bg-blue-600,
+        body[data-theme="light"] button.bg-blue-600 {
+            color: #ffffff;
+        }
+        body[data-theme="light"] .hover\:bg-slate-800:hover {
+            background-color: #e2e8f0;
+        }
     </style>
 </head>
-<body class="antialiased relative overflow-x-hidden">
+<body data-theme="light" class="antialiased relative overflow-x-hidden">
 
     <!-- Background Glow Effect -->
     <div class="bg-glow"></div>
@@ -83,15 +136,25 @@
                 </nav>
 
                 <!-- CTA Button -->
-                <div class="hidden md:flex items-center">
+                <div class="hidden lg:flex items-center">
                     <a href="#contato" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(37,99,235,0.5)]">
                         Fale Conosco
                     </a>
                 </div>
 
+                <button id="theme-toggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false" class="inline-flex items-center gap-2 rounded-full border border-slate-700 px-3 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <svg id="theme-toggle-moon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                    <svg id="theme-toggle-sun" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <span id="theme-toggle-label" class="hidden sm:inline">Modo escuro</span>
+                </button>
+
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                    <button id="mobile-menu-btn" aria-label="Abrir menu" class="text-gray-300 hover:text-white focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -364,6 +427,22 @@
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleLabel = document.getElementById('theme-toggle-label');
+        const themeToggleMoon = document.getElementById('theme-toggle-moon');
+        const themeToggleSun = document.getElementById('theme-toggle-sun');
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.dataset.theme === 'dark';
+            document.body.dataset.theme = isDark ? 'light' : 'dark';
+            themeToggle.setAttribute('aria-pressed', String(!isDark));
+            themeToggle.setAttribute('aria-label', isDark ? 'Ativar modo escuro' : 'Ativar modo claro');
+            themeToggleLabel.textContent = isDark ? 'Modo escuro' : 'Modo claro';
+            themeToggleMoon.classList.toggle('hidden', !isDark);
+            themeToggleSun.classList.toggle('hidden', isDark);
+        });
 
         // Mobile menu toggle
         const btn = document.getElementById('mobile-menu-btn');
