@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KS Soundworks | Grupo KS - Produção Musical & Vídeos Sob Medida</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'Inter', 'Helvetica Neue', 'sans-serif'],
+          },
+          colors: {
+            ks: {
+              blue: '#0071e3',
+              blueHover: '#0077ed',
+              cyan: '#00f0ff',
+              purple: '#8b5cf6',
+              // Dark theme colors
+              darkBg: '#090a0f',
+              darkCard: '#13151f',
+              darkBorder: '#232738',
+              // Elevated Light theme colors (Studio Gray for backdrop, Pure White for cards)
+              lightBg: '#eef0f4',
+              lightCard: '#ffffff',
+              lightBorder: '#d1d5db',
+              lightText: '#0f172a',
+              lightMuted: '#475569'
+            }
+          },
+          boxShadow: {
+            'light-card': '0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
+            'dark-card': '0 12px 35px -5px rgba(0, 0, 0, 0.5), 0 4px 15px -2px rgba(0, 0, 0, 0.3)',
+            'glow-blue': '0 0 25px rgba(0, 113, 227, 0.35)',
+            'glow-cyan': '0 0 25px rgba(0, 240, 255, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    .dark ::-webkit-scrollbar-track {
+      background: #090a0f;
+    }
+    ::-webkit-scrollbar-track {
+      background: #eef0f4;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #232738;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    /* Glassmorphism Classes */
+    .glass-header-dark {
+      background-color: rgba(9, 10, 15, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .glass-header-light {
+      background-color: rgba(238, 240, 244, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Equalizer Bar Animation */
+    .eq-bar {
+      transition: height 0.18s ease-in-out, background-color 0.3s ease;
+    }
+
+    /* Smooth Theme Transition */
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-[#eef0f4] dark:bg-[#090a0f] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-ks-blue selection:text-white">
+
+  <!-- ==================== TOP NAVIGATION BAR ==================== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 glass-header-light dark:glass-header-dark border-b border-ks-lightBorder dark:border-ks-darkBorder transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-14 text-xs font-medium">
+        
+        <!-- Brand Logo & Main Links -->
+        <div class="flex items-center space-x-6">
+          <a href="#" class="flex items-center space-x-2.5 text-slate-900 dark:text-white hover:opacity-80 transition">
+            <span class="w-7 h-7 rounded-lg bg-gradient-to-tr from-ks-blue to-ks-cyan text-white flex items-center justify-center font-extrabold text-xs shadow-md">KS</span>
+            <div class="flex flex-col">
+              <span class="font-bold text-sm tracking-tight leading-none">Kode Source</span>
+              <span class="text-[9px] text-ks-lightMuted dark:text-slate-400 font-mono tracking-widest uppercase">Grupo KS</span>
+            </div>
+          </a>
+          
+          <!-- Ecosystem Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-5 text-ks-lightMuted dark:text-slate-400">
+            <span class="text-slate-900 dark:text-white font-bold flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-ks-blue animate-pulse"></span>
+              KS Soundworks
+            </span>
+            <span class="text-slate-300 dark:text-slate-700">|</span>
+            <button onclick="switchSegment('studytoo')" class="hover:text-slate-900 dark:hover:text-white transition">Study Too</button>
+            <button onclick="switchSegment('marketing')" class="hover:text-slate-900 dark:hover:text-white transition">KS Marketing</button>
+            <button onclick="switchSegment('store')" class="hover:text-slate-900 dark:hover:text-white transition">Kode Store</button>
+          </div>
+        </div>
+
+        <!-- Right Side Actions: Theme Switcher, Briefing Portal, Cart -->
+        <div class="flex items-center space-x-3">
+          
+          <!-- THEME TOGGLE BUTTON (SUN / MOON) -->
+          <button onclick="toggleTheme()" id="themeToggleBtn" class="flex items-center gap-1.5 bg-white dark:bg-[#13151f] text-slate-800 dark:text-slate-200 px-3 py-1.5 rounded-full border border-slate-300 dark:border-ks-darkBorder hover:border-ks-blue transition shadow-sm" title="Alternar Modo Claro / Escuro">
+            <i data-lucide="sun" class="w-4 h-4 text-amber-500 hidden dark:block"></i>
+            <i data-lucide="moon" class="w-4 h-4 text-ks-blue block dark:hidden"></i>
+            <span class="text-[11px] font-semibold hidden sm:inline" id="themeLabel">Dark Studio</span>
+          </button>
+
+          <!-- Code / Briefing Button -->
+          <button onclick="openBriefingModal()" class="flex items-center gap-1.5 bg-white dark:bg-[#13151f] text-slate-800 dark:text-slate-200 px-3.5 py-1.5 rounded-full border border-slate-300 dark:border-ks-darkBorder hover:border-ks-blue transition text-xs font-semibold shadow-sm">
+            <i data-lucide="key-round" class="w-3.5 h-3.5 text-ks-blue"></i>
+            <span>Meu Briefing</span>
+          </button>
+
+          <!-- Shopping Cart Icon with Badge -->
+          <button onclick="toggleCartDrawer()" class="relative bg-white dark:bg-[#13151f] text-slate-800 dark:text-slate-200 p-2 rounded-full border border-slate-300 dark:border-ks-darkBorder hover:border-ks-blue transition shadow-sm" aria-label="Sexta de Compras">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span id="cartBadge" class="hidden absolute -top-1 -right-1 bg-ks-blue text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">
+              0
+            </span>
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button onclick="toggleMobileMenu()" class="md:hidden text-slate-800 dark:text-slate-200 p-1">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-[#090a0f] border-b border-slate-300 dark:border-ks-darkBorder px-6 py-4 space-y-3 text-xs shadow-lg">
+      <div class="uppercase tracking-wider text-ks-lightMuted dark:text-slate-500 font-bold text-[10px]">Ecossistema Grupo KS</div>
+      <a href="#" class="block text-ks-blue font-bold text-sm">KS Soundworks (Música & Vídeo)</a>
+      <a href="#studytoo" onclick="switchSegment('studytoo')" class="block text-slate-800 dark:text-slate-200 text-sm">Study Too (Ferramenta de Estudo)</a>
+      <a href="#marketing" onclick="switchSegment('marketing')" class="block text-slate-800 dark:text-slate-200 text-sm">KS Marketing (Social Media)</a>
+      <a href="#store" onclick="switchSegment('store')" class="block text-slate-800 dark:text-slate-200 text-sm">Kode Store (Moda & Merch)</a>
+    </div>
+  </nav>
+
+  <!-- Notification Toast Container -->
+  <div id="toastContainer" class="fixed top-16 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="pt-28 pb-16 md:pt-36 md:pb-24 text-center px-4 overflow-hidden">
+    <div class="max-w-4xl mx-auto space-y-6">
+      
+      <!-- Eyebrow Tag -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder text-xs text-slate-800 dark:text-slate-300 font-semibold shadow-sm">
+        <span class="w-2.5 h-2.5 rounded-full bg-ks-blue animate-pulse"></span>
+        KS Soundworks • Studio Engine 2.0
+      </div>
+
+      <!-- Main Headline Apple Style -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 dark:text-white">
+        KS Soundworks. <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-ks-blue via-ks-purple to-ks-cyan">
+          Músicas e Vídeos Sob Medida.
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-base sm:text-lg text-ks-lightMuted dark:text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
+        Composição musical autoral, engenharia de áudio profissional e videoclipes em resolução 4K. Selecione seu produto e personalize cada parâmetro no nosso sistema de briefing.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a href="#catalogo" class="bg-ks-blue hover:bg-ks-blueHover text-white font-semibold px-7 py-3.5 rounded-full transition duration-200 shadow-lg shadow-ks-blue/20 flex items-center gap-2 text-sm">
+          <i data-lucide="disc" class="w-4 h-4"></i>
+          <span>Ver Produtos & Serviços</span>
+          <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </a>
+        <button onclick="openBriefingModal()" class="bg-white dark:bg-[#13151f] hover:bg-slate-100 dark:hover:bg-[#1c1f2e] text-slate-900 dark:text-white font-semibold px-7 py-3.5 rounded-full border border-slate-300 dark:border-ks-darkBorder transition text-sm flex items-center gap-2 shadow-sm">
+          <i data-lucide="sliders" class="w-4 h-4 text-ks-blue"></i>
+          <span>Resgatar Código / Briefing</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Audio Equalizer Interactive Display Card -->
+    <div class="mt-12 max-w-5xl mx-auto bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-3xl p-6 sm:p-8 shadow-light-card dark:shadow-dark-card text-left transition-all">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-ks-darkBorder pb-4 mb-6 text-xs text-ks-lightMuted dark:text-slate-400">
+        <div class="flex items-center gap-2 font-mono">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+          <span>KS-AUDIO-ENGINE • Hi-Res 96kHz / 24-bit</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-2 text-slate-800 dark:text-slate-200 font-semibold">
+          <i data-lucide="activity" class="w-4 h-4 text-ks-blue"></i>
+          <span>Visualizador de Espectro em Tempo Real</span>
+        </div>
+      </div>
+
+      <!-- Waveform Bars Container -->
+      <div class="h-28 sm:h-36 w-full flex items-end justify-between gap-1 px-3 py-3 bg-slate-100 dark:bg-[#090a0f] rounded-2xl border border-slate-200 dark:border-slate-800" id="heroWaveContainer">
+        <!-- Generated via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PORTFOLIO INTERATIVO (AUDIO SAMPLES PLAYER) ==================== -->
+  <section class="py-20 bg-slate-200/60 dark:bg-[#0c0d14] border-t border-b border-slate-300 dark:border-ks-darkBorder px-4">
+    <div class="max-w-7xl mx-auto space-y-12">
+      
+      <div class="text-center space-y-2">
+        <h2 class="text-xs uppercase tracking-widest text-ks-blue font-extrabold">Portfólio & Demonstrações</h2>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Ouça a sonoridade KS Soundworks</h3>
+        <p class="text-ks-lightMuted dark:text-slate-400 max-w-lg mx-auto text-sm">
+          Teste os sintetizadores de áudio gerados em tempo real direto no seu navegador.
+        </p>
+      </div>
+
+      <!-- 4-Track Grid Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Track 1: Prog Metal -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card hover:border-ks-blue dark:hover:border-ks-blue transition group">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Prog Metal</span>
+              <span class="text-xs text-ks-lightMuted dark:text-slate-400 font-mono">140 BPM</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-ks-blue transition">Heavy Riff Heavyweight</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Guitarras distorcidas com afinação drop e bateria agressiva de alto impacto.</p>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="h-10 bg-slate-100 dark:bg-[#090a0f] rounded-xl flex items-center justify-center gap-1 px-2 border border-slate-200 dark:border-slate-800" id="barsTrack1"></div>
+            <button onclick="toggleAudioDemo('prog')" id="btnTrack1" class="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-ks-blue dark:hover:bg-ks-blue dark:hover:text-white font-bold py-2.5 rounded-full transition flex items-center justify-center gap-2 text-xs shadow">
+              <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+              <span>Ouvir Prog Metal</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Track 2: Synthwave Cyberpunk -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card hover:border-ks-cyan dark:hover:border-ks-cyan transition group">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="bg-cyan-100 dark:bg-cyan-950/60 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Synthwave</span>
+              <span class="text-xs text-ks-lightMuted dark:text-slate-400 font-mono">118 BPM</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-ks-cyan transition">Neon Cyberpunk 2088</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Sintetizadores analógicos vintage, arpejos synth e atmosfera retrofuturista.</p>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="h-10 bg-slate-100 dark:bg-[#090a0f] rounded-xl flex items-center justify-center gap-1 px-2 border border-slate-200 dark:border-slate-800" id="barsTrack2"></div>
+            <button onclick="toggleAudioDemo('synth')" id="btnTrack2" class="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-ks-blue dark:hover:bg-ks-blue dark:hover:text-white font-bold py-2.5 rounded-full transition flex items-center justify-center gap-2 text-xs shadow">
+              <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+              <span>Ouvir Synthwave</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Track 3: Power Ballad -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card hover:border-amber-500 transition group">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Power Ballad</span>
+              <span class="text-xs text-ks-lightMuted dark:text-slate-400 font-mono">85 BPM</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition">Emotional Solo</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Piano expressivo acompanhado de solo de guitarra marcante e clima emocional.</p>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="h-10 bg-slate-100 dark:bg-[#090a0f] rounded-xl flex items-center justify-center gap-1 px-2 border border-slate-200 dark:border-slate-800" id="barsTrack3"></div>
+            <button onclick="toggleAudioDemo('ballad')" id="btnTrack3" class="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-ks-blue dark:hover:bg-ks-blue dark:hover:text-white font-bold py-2.5 rounded-full transition flex items-center justify-center gap-2 text-xs shadow">
+              <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+              <span>Ouvir Ballad</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Track 4: Orquestral Cinematic -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card hover:border-emerald-500 transition group">
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Orquestral</span>
+              <span class="text-xs text-ks-lightMuted dark:text-slate-400 font-mono">100 BPM</span>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition">Epic Symphony Trailer</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Metais imponentes e arranjo de cordas dramático ideal para abertura de vídeos.</p>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="h-10 bg-slate-100 dark:bg-[#090a0f] rounded-xl flex items-center justify-center gap-1 px-2 border border-slate-200 dark:border-slate-800" id="barsTrack4"></div>
+            <button onclick="toggleAudioDemo('epic')" id="btnTrack4" class="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-ks-blue dark:hover:bg-ks-blue dark:hover:text-white font-bold py-2.5 rounded-full transition flex items-center justify-center gap-2 text-xs shadow">
+              <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+              <span>Ouvir Orquestral</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CATÁLOGO DE PRODUTOS ==================== -->
+  <section id="catalogo" class="py-24 px-4">
+    <div class="max-w-7xl mx-auto space-y-12">
+
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-xs font-extrabold uppercase tracking-widest text-ks-blue">Catálogo de Produtos & Serviços</h2>
+        <h3 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">Escolha sua produção sob medida</h3>
+        <p class="text-ks-lightMuted dark:text-slate-400 text-base">Após concluir a compra, você receberá o código único para iniciar o formulário de briefing criativo.</p>
+      </div>
+
+      <!-- HERO PRODUCT CARD 1: Produção Musical Customizada -->
+      <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between shadow-light-card dark:shadow-dark-card hover:border-ks-blue transition duration-300 relative overflow-hidden group">
+        <div class="max-w-xl space-y-4 z-10">
+          <span class="inline-block bg-ks-blue text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">Mais Vendido</span>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Produção Musical Customizada</h3>
+          <p class="text-ks-lightMuted dark:text-slate-400 text-base leading-relaxed">
+            Composição inédita e exclusiva. Escolha o gênero, andamento, arranjos de instrumentos e temática da sua faixa musical através do briefing.
+          </p>
+          <div class="flex items-baseline gap-3 pt-2">
+            <span class="text-4xl font-extrabold text-slate-900 dark:text-white">R$ 490,00</span>
+            <span class="text-xs text-ks-lightMuted dark:text-slate-400">Entrega em até 5 dias úteis</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 pt-3">
+            <button onclick="addToCart('musica-custom', 'Produção Musical Customizada', 490)" class="bg-ks-blue hover:bg-ks-blueHover text-white font-bold px-7 py-3.5 rounded-full transition flex items-center gap-2 text-sm shadow-lg shadow-ks-blue/25">
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              <span>Adicionar à Sexta</span>
+            </button>
+            <button onclick="quickBuy('musica-custom', 'Produção Musical Customizada', 490)" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold px-7 py-3.5 rounded-full border border-slate-300 dark:border-slate-700 transition text-sm">
+              Comprar Agora
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-8 lg:mt-0 w-full lg:w-80 bg-slate-50 dark:bg-[#090a0f] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+            <i data-lucide="music" class="w-8 h-8 text-ks-blue"></i>
+            <span class="text-xs font-mono text-ks-lightMuted dark:text-slate-400">KS-MUS-01</span>
+          </div>
+          <div class="space-y-2">
+            <div class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Especificações Incluso</div>
+            <ul class="text-xs text-ks-lightMuted dark:text-slate-400 space-y-2">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Mixagem & Masterização Studio</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Stems em WAV 24-bit Separados</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Licença de Uso Comercial Vitalícia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO PRODUCT CARD 2: Videoclipe com Inteligência Artificial -->
+      <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row-reverse items-center justify-between shadow-light-card dark:shadow-dark-card hover:border-purple-500 transition duration-300 relative overflow-hidden group">
+        <div class="max-w-xl space-y-4 z-10">
+          <span class="inline-block bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Qualidade Cinemática 4K</span>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Videoclipe por IA 4K Ultra HD</h3>
+          <p class="text-ks-lightMuted dark:text-slate-400 text-base leading-relaxed">
+            Produção de clipe visual gerado via IA generativa avançada com roteiro e direção de cena montados segundo seu briefing.
+          </p>
+          <div class="flex items-baseline gap-3 pt-2">
+            <span class="text-4xl font-extrabold text-slate-900 dark:text-white">R$ 790,00</span>
+            <span class="text-xs text-ks-lightMuted dark:text-slate-400">Entrega em até 7 dias úteis</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 pt-3">
+            <button onclick="addToCart('video-clipe-ia', 'Videoclipe por IA 4K Ultra HD', 790)" class="bg-ks-blue hover:bg-ks-blueHover text-white font-bold px-7 py-3.5 rounded-full transition flex items-center gap-2 text-sm shadow-lg shadow-ks-blue/25">
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              <span>Adicionar à Sexta</span>
+            </button>
+            <button onclick="quickBuy('video-clipe-ia', 'Videoclipe por IA 4K Ultra HD', 790)" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold px-7 py-3.5 rounded-full border border-slate-300 dark:border-slate-700 transition text-sm">
+              Comprar Agora
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-8 lg:mt-0 w-full lg:w-80 bg-slate-50 dark:bg-[#090a0f] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+            <i data-lucide="video" class="w-8 h-8 text-purple-600"></i>
+            <span class="text-xs font-mono text-ks-lightMuted dark:text-slate-400">KS-VID-4K</span>
+          </div>
+          <div class="space-y-2">
+            <div class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Especificações Incluso</div>
+            <ul class="text-xs text-ks-lightMuted dark:text-slate-400 space-y-2">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Renderização em Resolução 4K</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Formato 16:9 + Vertical Reels (9:16)</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Efeitos Visuais & Color Grading Pro</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADDITIONAL SERVICES GRID (4 CARDS) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Card 3: Combo Ouro -->
+        <div class="bg-white dark:bg-[#13151f] border-2 border-ks-blue rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card relative">
+          <span class="absolute -top-3 left-4 bg-ks-blue text-white text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Super Combo</span>
+          <div class="space-y-3 pt-2">
+            <i data-lucide="zap" class="w-7 h-7 text-ks-blue"></i>
+            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Combo Música + Clipe 4K</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Pacote completo com composição autoral exclusiva e videoclipe de alta resolução sincronizado.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span class="font-extrabold text-lg text-slate-900 dark:text-white">R$ 1.190,00</span>
+            <button onclick="addToCart('combo-musica-video', 'Combo Música + Clipe 4K', 1190)" class="bg-ks-blue hover:bg-ks-blueHover text-white text-xs font-bold px-4 py-2 rounded-full transition shadow">
+              + Adicionar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 4: Lyric Video Animado -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card">
+          <div class="space-y-3">
+            <i data-lucide="type" class="w-7 h-7 text-cyan-600"></i>
+            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Lyric Video Animado</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Animação de letra tipográfica sincronizada com a música para lançamentos no YouTube e Redes.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span class="font-bold text-slate-900 dark:text-white">R$ 390,00</span>
+            <button onclick="addToCart('lyric-video', 'Lyric Video Animado', 390)" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-bold px-4 py-2 rounded-full transition">
+              + Adicionar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 5: Trilha Sonora Instrumental -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card">
+          <div class="space-y-3">
+            <i data-lucide="disc" class="w-7 h-7 text-purple-600"></i>
+            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Trilha Instrumental</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Background musical contínuo para fundos de vídeos, podcasts, jogos ou comerciais corporativos.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span class="font-bold text-slate-900 dark:text-white">R$ 350,00</span>
+            <button onclick="addToCart('trilha-instrumental', 'Trilha Sonora Instrumental', 350)" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-bold px-4 py-2 rounded-full transition">
+              + Adicionar
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 6: Jingle & Audio Branding -->
+        <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-6 flex flex-col justify-between shadow-light-card dark:shadow-dark-card">
+          <div class="space-y-3">
+            <i data-lucide="volume-2" class="w-7 h-7 text-emerald-600"></i>
+            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Jingle & Audio Branding</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400">Assinatura sonora marcante de 5 a 30 segundos para vinhetas e identidade sonora de marcas.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span class="font-bold text-slate-900 dark:text-white">R$ 380,00</span>
+            <button onclick="addToCart('jingle-branding', 'Jingle & Audio Branding', 380)" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-bold px-4 py-2 rounded-full transition">
+              + Adicionar
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== ECOSSISTEMA GRUPO KS ==================== -->
+  <section class="py-20 bg-slate-200/50 dark:bg-[#0c0d14] border-t border-slate-300 dark:border-ks-darkBorder px-4">
+    <div class="max-w-7xl mx-auto space-y-10">
+
+      <div class="text-center max-w-xl mx-auto">
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Demais segmentos do Grupo KS</h3>
+        <p class="text-ks-lightMuted dark:text-slate-400 text-xs sm:text-sm mt-1">Conheça as marcas integradas do nosso ecossistema de soluções digitais.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Study Too -->
+        <div id="studytoo" class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-8 flex flex-col justify-between shadow-light-card dark:shadow-dark-card">
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest bg-amber-100 dark:bg-amber-950 px-2.5 py-1 rounded-full border border-amber-200 dark:border-amber-800">Ferramenta de Estudo</span>
+            <h4 class="text-2xl font-bold text-slate-900 dark:text-white">Study Too</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400 leading-relaxed">
+              Plataforma inteligente de auxílio a estudos, mapas mentais interativos e cronogramas otimizados de aprendizado.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-ks-lightMuted dark:text-slate-400 flex justify-between items-center">
+            <span>Plataforma KS</span>
+            <span class="font-bold text-slate-900 dark:text-white">Em breve</span>
+          </div>
+        </div>
+
+        <!-- KS Marketing -->
+        <div id="marketing" class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-8 flex flex-col justify-between shadow-light-card dark:shadow-dark-card">
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-widest bg-cyan-100 dark:bg-cyan-950 px-2.5 py-1 rounded-full border border-cyan-200 dark:border-cyan-800">Social Media</span>
+            <h4 class="text-2xl font-bold text-slate-900 dark:text-white">KS Marketing</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400 leading-relaxed">
+              Gestão estratégica de mídias sociais, produção contínua de conteúdo e posicionamento de marca para empresas e criadores.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs flex justify-between items-center">
+            <span class="text-ks-lightMuted dark:text-slate-400">Serviço Ativo</span>
+            <button onclick="addToCart('ks-marketing', 'Consultoria KS Marketing Social Media', 1200)" class="text-ks-blue font-bold hover:underline">
+              Contratar (R$ 1.200)
+            </button>
+          </div>
+        </div>
+
+        <!-- Kode Store -->
+        <div id="store" class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-2xl p-8 flex flex-col justify-between shadow-light-card dark:shadow-dark-card">
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold text-purple-700 dark:text-purple-400 uppercase tracking-widest bg-purple-100 dark:bg-purple-950 px-2.5 py-1 rounded-full border border-purple-200 dark:border-purple-800">Merchandise</span>
+            <h4 class="text-2xl font-bold text-slate-900 dark:text-white">Kode Store</h4>
+            <p class="text-xs text-ks-lightMuted dark:text-slate-400 leading-relaxed">
+              Vestuário streetwear exclusivo, moletons minimalistas e acessórios personalizados com a marca Kode Source.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs flex justify-between items-center">
+            <span class="text-ks-lightMuted dark:text-slate-400">Coleção Oficial</span>
+            <button onclick="addToCart('moletom-ks', 'Moletom Kode Source Oversized', 220)" class="text-purple-600 dark:text-purple-400 font-bold hover:underline">
+              Moletom (R$ 220)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SEXTA DE COMPRAS (SLIDING DRAWER) ==================== -->
+  <div id="cartOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300" onclick="toggleCartDrawer()"></div>
+  
+  <div id="cartDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white dark:bg-[#090a0f] border-l border-slate-300 dark:border-ks-darkBorder z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+    
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-slate-200 dark:border-ks-darkBorder flex items-center justify-between bg-slate-50 dark:bg-[#13151f]">
+      <div class="flex items-center gap-2.5">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-ks-blue"></i>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Sexta de Compras</h3>
+      </div>
+      <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-slate-800 dark:hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Content Items -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+      <div id="emptyCartState" class="h-full flex flex-col items-center justify-center text-center text-ks-lightMuted dark:text-slate-500 py-12">
+        <i data-lucide="shopping-bag" class="w-12 h-12 mb-3 opacity-40"></i>
+        <p class="text-sm font-bold text-slate-800 dark:text-slate-300">Sua sexta de compras está vazia</p>
+        <p class="text-xs text-ks-lightMuted dark:text-slate-500 mt-1">Adicione produtos do catálogo para prosseguir.</p>
+      </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-6 border-t border-slate-200 dark:border-ks-darkBorder bg-slate-50 dark:bg-[#13151f] space-y-4">
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between text-ks-lightMuted dark:text-slate-400">
+          <span>Subtotal</span>
+          <span id="cartSubtotal" class="font-bold text-slate-900 dark:text-white">R$ 0,00</span>
+        </div>
+        <div class="flex justify-between text-ks-lightMuted dark:text-slate-400 text-xs">
+          <span>Impostos & Taxas de Produção</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-bold">Inclusos</span>
+        </div>
+        <div class="flex justify-between text-slate-900 dark:text-white font-extrabold text-xl pt-2 border-t border-slate-200 dark:border-slate-800">
+          <span>Total</span>
+          <span id="cartTotal" class="text-ks-blue">R$ 0,00</span>
+        </div>
+      </div>
+
+      <button id="btnCheckout" onclick="startCheckoutProcess()" disabled class="w-full bg-ks-blue hover:bg-ks-blueHover disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-full transition shadow-lg shadow-ks-blue/20 flex items-center justify-center gap-2">
+        <span>Finalizar Compra</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== GERADOR DE CÓDIGO (CHECKOUT MODAL) ==================== -->
+  <div id="checkoutModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-slate-900 dark:text-white">
+      
+      <div class="text-center space-y-2">
+        <div class="w-14 h-14 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 shadow">
+          <i data-lucide="check" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-2xl font-extrabold">Compra Finalizada com Sucesso!</h3>
+        <p class="text-xs text-ks-lightMuted dark:text-slate-400">Utilize o código gerado abaixo para acessar o formulário de personalização sonora e visual.</p>
+      </div>
+
+      <!-- Order Code Box -->
+      <div class="bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 rounded-2xl p-5 text-center space-y-2">
+        <span class="text-[10px] font-extrabold uppercase tracking-widest text-ks-lightMuted dark:text-slate-500">Seu Código Único de Compra</span>
+        <div class="flex items-center justify-center gap-3">
+          <span id="generatedCodeDisplay" class="font-mono text-2xl sm:text-3xl font-extrabold tracking-wider text-ks-blue">KS-98421-SW</span>
+          <button onclick="copyGeneratedCode()" class="text-slate-500 hover:text-slate-900 dark:hover:text-white p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 transition" title="Copiar Código">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-3 pt-2">
+        <button onclick="proceedFromCheckoutToBriefing()" class="w-full bg-ks-blue hover:bg-ks-blueHover text-white font-bold py-3.5 rounded-full transition shadow-lg shadow-ks-blue/20 flex items-center justify-center gap-2">
+          <i data-lucide="sliders" class="w-4 h-4"></i>
+          <span>Ir para o Formulário de Briefing com este Código</span>
+        </button>
+        <button onclick="closeCheckoutModal()" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold py-2.5 rounded-full transition text-xs">
+          Preencher Briefing Mais Tarde
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== BRIEFING MODAL (QUESTIONÁRIO POR BOTÕES) ==================== -->
+  <div id="briefingModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-3xl max-w-3xl w-full my-auto p-6 sm:p-10 shadow-2xl relative text-slate-900 dark:text-white">
+      
+      <!-- Close Button -->
+      <button onclick="closeBriefingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 dark:hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <!-- STEP 1: CODE INPUT SCREEN -->
+      <div id="briefingStepCode" class="space-y-6">
+        <div class="text-center max-w-md mx-auto space-y-2">
+          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-950 text-ks-blue border border-blue-200 dark:border-blue-800 rounded-full flex items-center justify-center mx-auto mb-2">
+            <i data-lucide="key-round" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-2xl font-extrabold">Portal de Briefing KS</h3>
+          <p class="text-xs text-ks-lightMuted dark:text-slate-400">Digite seu código de compra para carregar o questionário interativo de personalização do seu produto.</p>
+        </div>
+
+        <div class="max-w-md mx-auto space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">Código da Compra</label>
+            <input type="text" id="briefingCodeInput" placeholder="Ex: KS-98421-SW" class="w-full bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 rounded-2xl px-4 py-3.5 text-center font-mono text-xl text-ks-blue uppercase tracking-widest focus:outline-none focus:border-ks-blue transition">
+          </div>
+
+          <button onclick="validateBriefingCode()" class="w-full bg-ks-blue hover:bg-ks-blueHover text-white font-bold py-3.5 rounded-full transition shadow-lg shadow-ks-blue/20 flex items-center justify-center gap-2">
+            <span>Validar e Iniciar Briefing</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          
+          <div class="text-center">
+            <span class="text-xs text-ks-lightMuted dark:text-slate-400">Código de Teste Rápido: <button onclick="useDemoCode()" class="text-ks-blue underline font-mono font-bold">KS-98421-SW</button></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: BUTTON-BASED QUESTIONNAIRE FORM -->
+      <div id="briefingStepForm" class="hidden space-y-6">
+        
+        <!-- Header & Progress Bar -->
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <span class="text-xs text-ks-blue font-mono font-bold uppercase" id="activeOrderCodeDisplay">KS-98421-SW</span>
+              <h3 class="text-xl font-extrabold">Personalização do Produto</h3>
+            </div>
+            <span id="formProgressText" class="text-xs font-mono text-ks-blue font-bold">0% Concluído</span>
+          </div>
+          
+          <div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div id="formProgressBar" class="h-full bg-ks-blue transition-all duration-300 w-[0%]"></div>
+          </div>
+        </div>
+
+        <!-- Scrollable Form Container -->
+        <div class="space-y-6 max-h-[60vh] overflow-y-auto pr-2">
+          
+          <!-- Q1: Gênero Musical -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">1. Gênero Musical Principal</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <button type="button" onclick="selectOption('style', 'Prog Metal', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-left flex items-center justify-between">
+                <span>Prog Metal / Heavy</span>
+                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 text-ks-blue"></i>
+              </button>
+              <button type="button" onclick="selectOption('style', 'Synthwave Cyberpunk', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-left flex items-center justify-between">
+                <span>Synthwave / Cyberpunk</span>
+                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 text-ks-blue"></i>
+              </button>
+              <button type="button" onclick="selectOption('style', 'Hard Rock', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-left flex items-center justify-between">
+                <span>Hard Rock Clássico</span>
+                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 text-ks-blue"></i>
+              </button>
+              <button type="button" onclick="selectOption('style', 'Eletronico Dance', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-left flex items-center justify-between">
+                <span>Eletrônico / EDM</span>
+                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 text-ks-blue"></i>
+              </button>
+              <button type="button" onclick="selectOption('style', 'Orquestral Cinematic', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-left flex items-center justify-between">
+                <span>Orquestral Cinemático</span>
+                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 text-ks-blue"></i>
+              </button>
+              <button type="button" onclick="selectOption('style', 'Lo-Fi Chill', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-left flex items-center justify-between">
+                <span>Lo-Fi / Ambient</span>
+                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 text-ks-blue"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Q2: Instrumentação -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">2. Instrumentação Requerida</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button type="button" onclick="selectOption('arrangement', 'Power Trio', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                Power Trio (Bateria/Baixo/Guitarra)
+              </button>
+              <button type="button" onclick="selectOption('arrangement', 'Sintetizadores', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                Sintetizadores Analógicos
+              </button>
+              <button type="button" onclick="selectOption('arrangement', 'Orquestra + Banda', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                Orquestra & Banda
+              </button>
+              <button type="button" onclick="selectOption('arrangement', 'Acustico Minimal', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                Acústico Minimalista
+              </button>
+            </div>
+          </div>
+
+          <!-- Q3: Andamento/Tempo -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">3. Andamento / Tempo (BPM)</label>
+            <div class="grid grid-cols-3 gap-2.5">
+              <button type="button" onclick="selectOption('tempo', 'Lento & Atmosferico', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                🌙 Lento & Atmosférico
+              </button>
+              <button type="button" onclick="selectOption('tempo', 'Medio Ritmico', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                🎵 Médio Rítmico
+              </button>
+              <button type="button" onclick="selectOption('tempo', 'Rapido & Agressivo', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-3 px-3 rounded-xl transition text-center">
+                ⚡ Rápido & Agressivo
+              </button>
+            </div>
+          </div>
+
+          <!-- Q4: Mood / Vibe -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">4. Mood / Vibe Sentimental</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button type="button" onclick="selectOption('mood', 'Epico & Triunfal', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                🔥 Épico & Triunfal
+              </button>
+              <button type="button" onclick="selectOption('mood', 'Sombrio Cyberpunk', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                🕶️ Sombrio Cyberpunk
+              </button>
+              <button type="button" onclick="selectOption('mood', 'Melancolico & Emotivo', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                🌧️ Melancólico & Emotivo
+              </button>
+              <button type="button" onclick="selectOption('mood', 'Energetico Motivacional', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                ⚡ Energético Motivacional
+              </button>
+            </div>
+          </div>
+
+          <!-- Q5: Estilo de Vídeo -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">5. Estilo Estético do Vídeo</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button type="button" onclick="selectOption('videoStyle', '3D Render Cyberpunk', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                3D Render Cyberpunk
+              </button>
+              <button type="button" onclick="selectOption('videoStyle', 'Cinematografico Classico', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                Cinematográfico Clássico
+              </button>
+              <button type="button" onclick="selectOption('videoStyle', 'Lyric Video Animado', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                Lyric Video Animado
+              </button>
+              <button type="button" onclick="selectOption('videoStyle', 'Concept Art IA 4K', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                Concept Art IA 4K
+              </button>
+            </div>
+          </div>
+
+          <!-- Q6: Resolução & Formato -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">6. Resolução e Formato de Saída</label>
+            <div class="grid grid-cols-3 gap-2.5">
+              <button type="button" onclick="selectOption('format', '4K Widescreen (16:9)', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                📺 4K Widescreen (16:9)
+              </button>
+              <button type="button" onclick="selectOption('format', 'Vertical Reels (9:16)', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                📱 Vertical Reels (9:16)
+              </button>
+              <button type="button" onclick="selectOption('format', 'Combo Ambos Formatos', this)" class="briefing-opt bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 hover:border-ks-blue text-xs font-bold py-2.5 rounded-xl transition text-center">
+                🎬 Combo Ambos Formatos
+              </button>
+            </div>
+          </div>
+
+          <!-- Q7: Observações -->
+          <div class="space-y-2">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-ks-lightMuted dark:text-slate-400">7. Detalhes Específicos ou Links de Referência</label>
+            <textarea id="briefingNotes" rows="3" placeholder="Insira referências de bandas, artistas ou elementos visuais essenciais..." class="w-full bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 rounded-2xl p-3.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-ks-blue transition"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="border-t border-slate-200 dark:border-slate-800 pt-4 flex items-center justify-between">
+          <button type="button" onclick="resetBriefingStep()" class="text-xs text-ks-lightMuted dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-semibold">
+            Voltar
+          </button>
+          <button type="button" onclick="submitBriefingForm()" class="bg-ks-blue hover:bg-ks-blueHover text-white font-bold px-7 py-3 rounded-full transition shadow-lg shadow-ks-blue/20 text-xs flex items-center gap-2">
+            <span>Confirmar Briefing e Iniciar Produção</span>
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- STEP 3: SUBMITTED SUCCESS VIEW -->
+      <div id="briefingStepSuccess" class="hidden text-center py-8 space-y-6">
+        <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 rounded-full flex items-center justify-center mx-auto shadow-md">
+          <i data-lucide="check-circle" class="w-10 h-10"></i>
+        </div>
+        
+        <div class="space-y-2">
+          <h3 class="text-3xl font-extrabold text-slate-900 dark:text-white">Briefing Confirmado com Sucesso!</h3>
+          <p class="text-xs text-ks-lightMuted dark:text-slate-400 max-w-md mx-auto">
+            A equipe de produtores e engenheiros de som da KS Soundworks já recebeu os dados do seu projeto.
+          </p>
+        </div>
+
+        <!-- Summary Recap Card -->
+        <div class="bg-slate-100 dark:bg-[#090a0f] border border-slate-300 dark:border-slate-800 rounded-2xl p-5 text-left max-w-md mx-auto space-y-3 text-xs">
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+            <span class="text-ks-lightMuted dark:text-slate-400">Status da Produção</span>
+            <span class="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Em Produção
+            </span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-slate-900 dark:text-white font-medium">
+            <div><span class="text-ks-lightMuted dark:text-slate-500 block text-[10px]">Gênero:</span> <span id="summaryStyle">-</span></div>
+            <div><span class="text-ks-lightMuted dark:text-slate-500 block text-[10px]">Arranjo:</span> <span id="summaryArrangement">-</span></div>
+            <div><span class="text-ks-lightMuted dark:text-slate-500 block text-[10px]">Andamento:</span> <span id="summaryTempo">-</span></div>
+            <div><span class="text-ks-lightMuted dark:text-slate-500 block text-[10px]">Vibe:</span> <span id="summaryMood">-</span></div>
+            <div><span class="text-ks-lightMuted dark:text-slate-500 block text-[10px]">Estilo Vídeo:</span> <span id="summaryVideoStyle">-</span></div>
+            <div><span class="text-ks-lightMuted dark:text-slate-500 block text-[10px]">Formato:</span> <span id="summaryFormat">-</span></div>
+          </div>
+        </div>
+
+        <button onclick="closeBriefingModal()" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-90 font-bold px-8 py-3 rounded-full transition text-xs shadow-md">
+          Concluir
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-200/80 dark:bg-[#090a0f] border-t border-slate-300 dark:border-ks-darkBorder text-ks-lightMuted dark:text-slate-400 text-xs py-12 px-4">
+    <div class="max-w-7xl mx-auto space-y-8">
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="space-y-2">
+          <div class="text-slate-900 dark:text-white font-bold mb-2">KS Soundworks</div>
+          <p><a href="#catalogo" class="hover:underline">Produção Musical Customizada</a></p>
+          <p><a href="#catalogo" class="hover:underline">Videoclipes 4K com IA</a></p>
+          <p><a href="#catalogo" class="hover:underline">Trilhas Instrumentais</a></p>
+          <p><a href="#" onclick="openBriefingModal()" class="hover:underline text-ks-blue font-bold">Portal de Briefing</a></p>
+        </div>
+        <div class="space-y-2">
+          <div class="text-slate-900 dark:text-white font-bold mb-2">Grupo KS</div>
+          <p><a href="#" class="hover:underline">Kode Source Hub</a></p>
+          <p><a href="#studytoo" class="hover:underline">Study Too</a></p>
+          <p><a href="#marketing" class="hover:underline">KS Marketing</a></p>
+          <p><a href="#store" class="hover:underline">Kode Store</a></p>
+        </div>
+        <div class="space-y-2">
+          <div class="text-slate-900 dark:text-white font-bold mb-2">Atendimento & Suporte</div>
+          <p><a href="#" class="hover:underline">Central de Ajuda</a></p>
+          <p><a href="#" class="hover:underline">Termos de Uso de Licença</a></p>
+          <p><a href="#" class="hover:underline">Política de Privacidade</a></p>
+        </div>
+        <div class="space-y-2">
+          <div class="text-slate-900 dark:text-white font-bold mb-2">Kode Source Brasil</div>
+          <p>Estúdio Digital Integrado</p>
+          <p class="text-ks-lightMuted dark:text-slate-500">Engenharia de som e inteligência criativa.</p>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-300 dark:border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+        <p>© 2026 Grupo KS (Kode Source Inc.). Todos os direitos reservados.</p>
+        <div class="flex items-center space-x-4">
+          <span class="hover:text-slate-900 dark:hover:text-white cursor-pointer">Instagram</span>
+          <span>•</span>
+          <span class="hover:text-slate-900 dark:hover:text-white cursor-pointer">YouTube</span>
+          <span>•</span>
+          <span class="hover:text-slate-900 dark:hover:text-white cursor-pointer">Spotify</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT SYSTEM ==================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // System State
+    const state = {
+      theme: 'dark',
+      cart: [],
+      activeAudio: null,
+      audioCtx: null,
+      briefingForm: {
+        code: '',
+        style: '',
+        arrangement: '',
+        tempo: '',
+        mood: '',
+        videoStyle: '',
+        format: '',
+        notes: ''
+      }
+    };
+
+    // On Window Load
+    window.onload = function() {
+      initHeroWaveBars();
+      initTrackWavebars('barsTrack1', 14);
+      initTrackWavebars('barsTrack2', 14);
+      initTrackWavebars('barsTrack3', 14);
+      initTrackWavebars('barsTrack4', 14);
+    };
+
+    // THEME SWITCHER LOGIC (Dark Mode Pro vs Elevated Studio Light)
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeLabel = document.getElementById('themeLabel');
+      
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        state.theme = 'light';
+        themeLabel.innerText = 'Estúdio Claro';
+        showToast('Modo Claro Elevado ativado', 'info');
+      } else {
+        html.classList.add('dark');
+        state.theme = 'dark';
+        themeLabel.innerText = 'Dark Studio';
+        showToast('Modo Dark Studio Pro ativado', 'info');
+      }
+    }
+
+    // Animated Hero Waveform
+    function initHeroWaveBars() {
+      const container = document.getElementById('heroWaveContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const barCount = window.innerWidth < 640 ? 30 : 64;
+      for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement('div');
+        const heightPct = Math.floor(Math.random() * 65) + 15;
+        bar.className = 'w-1 sm:w-1.5 rounded-full bg-gradient-to-t from-ks-blue via-ks-purple to-ks-cyan opacity-85 eq-bar';
+        bar.style.height = `${heightPct}%`;
+        container.appendChild(bar);
+      }
+
+      setInterval(() => {
+        const bars = container.querySelectorAll('.eq-bar');
+        bars.forEach(b => {
+          const newH = Math.floor(Math.random() * 85) + 10;
+          b.style.height = `${newH}%`;
+        });
+      }, 240);
+    }
+
+    function initTrackWavebars(elementId, count) {
+      const container = document.getElementById(elementId);
+      if (!container) return;
+      container.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'w-1 bg-slate-300 dark:bg-slate-800 rounded-full h-2 transition-all duration-200 track-bar';
+        container.appendChild(bar);
+      }
+    }
+
+    // Web Audio Synthesizer Engine
+    function toggleAudioDemo(trackType) {
+      if (!state.audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        state.audioCtx = new AudioContext();
+      }
+
+      if (state.activeAudio === trackType) {
+        stopAudioDemo();
+        showToast('Amostra pausada', 'info');
+        return;
+      }
+
+      stopAudioDemo();
+      state.activeAudio = trackType;
+      
+      updatePlayButtons(trackType, true);
+      playSynthPattern(trackType);
+      showToast(`Executando prévia: ${trackType.toUpperCase()}`, 'success');
+    }
+
+    let synthInterval = null;
+    function playSynthPattern(type) {
+      if (!state.audioCtx) return;
+
+      const containerId = type === 'prog' ? 'barsTrack1' : type === 'synth' ? 'barsTrack2' : type === 'ballad' ? 'barsTrack3' : 'barsTrack4';
+      const container = document.getElementById(containerId);
+
+      const freqs = type === 'prog' ? [110, 130.81, 146.83, 164.81, 220]
+                  : type === 'synth' ? [130.81, 164.81, 196, 246.94]
+                  : type === 'ballad' ? [220, 261.63, 329.63, 392]
+                  : [174.61, 220, 261.63, 349.23];
+
+      let noteIdx = 0;
+      synthInterval = setInterval(() => {
+        if (!state.activeAudio) return;
+
+        const osc = state.audioCtx.createOscillator();
+        const gain = state.audioCtx.createGain();
+
+        osc.type = type === 'prog' ? 'sawtooth' : type === 'synth' ? 'square' : 'sine';
+        osc.frequency.setValueAtTime(freqs[noteIdx % freqs.length], state.audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.06, state.audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, state.audioCtx.currentTime + 0.3);
+
+        osc.connect(gain);
+        gain.connect(state.audioCtx.destination);
+
+        osc.start();
+        osc.stop(state.audioCtx.currentTime + 0.35);
+
+        if (container) {
+          const bars = container.querySelectorAll('.track-bar');
+          bars.forEach(b => {
+            const h = Math.floor(Math.random() * 26) + 6;
+            b.style.height = `${h}px`;
+            b.classList.add('bg-ks-blue');
+          });
+        }
+
+        noteIdx++;
+      }, 220);
+    }
+
+    function stopAudioDemo() {
+      if (synthInterval) clearInterval(synthInterval);
+      state.activeAudio = null;
+      ['prog', 'synth', 'ballad', 'epic'].forEach(t => updatePlayButtons(t, false));
+
+      ['barsTrack1', 'barsTrack2', 'barsTrack3', 'barsTrack4'].forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+          const bars = container.querySelectorAll('.track-bar');
+          bars.forEach(b => {
+            b.style.height = '6px';
+            b.className = 'w-1 bg-slate-300 dark:bg-slate-800 rounded-full h-1.5 transition-all duration-200 track-bar';
+          });
+        }
+      });
+    }
+
+    function updatePlayButtons(type, isPlaying) {
+      const btnId = type === 'prog' ? 'btnTrack1' : type === 'synth' ? 'btnTrack2' : type === 'ballad' ? 'btnTrack3' : 'btnTrack4';
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
+
+      if (isPlaying) {
+        btn.innerHTML = `<i data-lucide="square" class="w-3.5 h-3.5 fill-current"></i><span>Pausar</span>`;
+        btn.classList.add('bg-ks-blue', 'text-white');
+      } else {
+        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i><span>Ouvir</span>`;
+        btn.classList.remove('bg-ks-blue');
+      }
+      lucide.createIcons();
+    }
+
+    // Drawer Navigation Controls
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function switchSegment(seg) {
+      showToast(`Módulo selecionado: ${seg.toUpperCase()}`, 'info');
+    }
+
+    function toggleCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const overlay = document.getElementById('cartOverlay');
+      const isHidden = drawer.classList.contains('translate-x-full');
+
+      if (isHidden) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    // Cart System Logic
+    function addToCart(id, name, price) {
+      const existing = state.cart.find(i => i.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({ id, name, price, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`Adicionado à Sexta: ${name}`, 'success');
+      toggleCartDrawer();
+    }
+
+    function quickBuy(id, name, price) {
+      addToCart(id, name, price);
+      startCheckoutProcess();
+    }
+
+    function removeFromCart(id) {
+      state.cart = state.cart.filter(i => i.id !== id);
+      updateCartUI();
+      showToast('Item removido da sexta', 'info');
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cartItemsContainer');
+      const emptyState = document.getElementById('emptyCartState');
+      const badge = document.getElementById('cartBadge');
+      const checkoutBtn = document.getElementById('btnCheckout');
+
+      const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      if (totalItems > 0) {
+        badge.innerText = totalItems;
+        badge.classList.remove('hidden');
+        checkoutBtn.disabled = false;
+      } else {
+        badge.classList.add('hidden');
+        checkoutBtn.disabled = true;
+      }
+
+      if (state.cart.length === 0) {
+        container.innerHTML = '';
+        container.appendChild(emptyState);
+      } else {
+        container.innerHTML = state.cart.map(item => `
+          <div class="bg-slate-100 dark:bg-[#13151f] border border-slate-300 dark:border-ks-darkBorder rounded-xl p-4 flex items-center justify-between">
+            <div class="space-y-1">
+              <div class="text-xs font-bold text-slate-900 dark:text-white">${item.name}</div>
+              <div class="text-xs text-ks-blue font-mono font-extrabold">R$ ${item.price.toFixed(2)} x ${item.qty}</div>
+            </div>
+            <button onclick="removeFromCart('${item.id}')" class="text-slate-400 hover:text-red-500 p-1.5 transition">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `).join('');
+        lucide.createIcons();
+      }
+
+      document.getElementById('cartSubtotal').innerText = `R$ ${subtotal.toFixed(2)}`;
+      document.getElementById('cartTotal').innerText = `R$ ${subtotal.toFixed(2)}`;
+    }
+
+    // Order Code Generation & Checkout Simulation
+    function startCheckoutProcess() {
+      if (state.cart.length === 0) return;
+
+      const randomNum = Math.floor(10000 + Math.random() * 90000);
+      const generatedCode = `KS-${randomNum}-SW`;
+      state.briefingForm.code = generatedCode;
+
+      toggleCartDrawer();
+      document.getElementById('generatedCodeDisplay').innerText = generatedCode;
+      document.getElementById('checkoutModal').classList.remove('hidden');
+
+      state.cart = [];
+      updateCartUI();
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    function copyGeneratedCode() {
+      const code = document.getElementById('generatedCodeDisplay').innerText;
+      copyToClipboard(code);
+      showToast('Código copiado para a área de transferência!', 'success');
+    }
+
+    function proceedFromCheckoutToBriefing() {
+      closeCheckoutModal();
+      openBriefingModal();
+      document.getElementById('briefingCodeInput').value = state.briefingForm.code;
+      validateBriefingCode();
+    }
+
+    // Briefing Modal Logic
+    function openBriefingModal() {
+      document.getElementById('briefingModal').classList.remove('hidden');
+    }
+
+    function closeBriefingModal() {
+      document.getElementById('briefingModal').classList.add('hidden');
+    }
+
+    function useDemoCode() {
+      document.getElementById('briefingCodeInput').value = 'KS-98421-SW';
+    }
+
+    function validateBriefingCode() {
+      const input = document.getElementById('briefingCodeInput').value.trim();
+      if (!input) {
+        showToast('Insira um código válido para prosseguir.', 'error');
+        return;
+      }
+
+      state.briefingForm.code = input.toUpperCase();
+      document.getElementById('activeOrderCodeDisplay').innerText = state.briefingForm.code;
+
+      document.getElementById('briefingStepCode').classList.add('hidden');
+      document.getElementById('briefingStepForm').classList.remove('hidden');
+      showToast('Código de compra liberado!', 'success');
+    }
+
+    function resetBriefingStep() {
+      document.getElementById('briefingStepForm').classList.add('hidden');
+      document.getElementById('briefingStepCode').classList.remove('hidden');
+    }
+
+    function selectOption(category, value, el) {
+      state.briefingForm[category] = value;
+
+      const container = el.parentElement;
+      const buttons = container.querySelectorAll('.briefing-opt');
+      buttons.forEach(btn => {
+        btn.classList.remove('border-ks-blue', 'bg-blue-500/10', 'text-ks-blue', 'ring-1', 'ring-ks-blue');
+        const icon = btn.querySelector('[data-lucide="check"]');
+        if (icon) icon.classList.add('opacity-0');
+      });
+
+      el.classList.add('border-ks-blue', 'bg-blue-500/10', 'text-ks-blue', 'ring-1', 'ring-ks-blue');
+      const checkIcon = el.querySelector('[data-lucide="check"]');
+      if (checkIcon) checkIcon.classList.remove('opacity-0');
+
+      updateFormProgress();
+    }
+
+    function updateFormProgress() {
+      let filled = 0;
+      const keys = ['style', 'arrangement', 'tempo', 'mood', 'videoStyle', 'format'];
+      keys.forEach(k => {
+        if (state.briefingForm[k]) filled++;
+      });
+
+      const pct = Math.round((filled / keys.length) * 100);
+      document.getElementById('formProgressBar').style.width = `${pct}%`;
+      document.getElementById('formProgressText').innerText = `${pct}% Concluído`;
+    }
+
+    function submitBriefingForm() {
+      if (!state.briefingForm.style || !state.briefingForm.arrangement) {
+        showToast('Selecione ao menos o Gênero e a Instrumentação.', 'error');
+        return;
+      }
+
+      state.briefingForm.notes = document.getElementById('briefingNotes').value;
+
+      document.getElementById('summaryStyle').innerText = state.briefingForm.style || 'Não especificado';
+      document.getElementById('summaryArrangement').innerText = state.briefingForm.arrangement || 'Não especificado';
+      document.getElementById('summaryTempo').innerText = state.briefingForm.tempo || 'Não especificado';
+      document.getElementById('summaryMood').innerText = state.briefingForm.mood || 'Não especificado';
+      document.getElementById('summaryVideoStyle').innerText = state.briefingForm.videoStyle || 'Não especificado';
+      document.getElementById('summaryFormat').innerText = state.briefingForm.format || 'Não especificado';
+
+      document.getElementById('briefingStepForm').classList.add('hidden');
+      document.getElementById('briefingStepSuccess').classList.remove('hidden');
+
+      showToast('Briefing confirmado com sucesso!', 'success');
+    }
+
+    // Toast Notification System
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+
+      const bg = type === 'success' ? 'bg-white dark:bg-[#13151f] border-emerald-500 text-emerald-600 dark:text-emerald-400'
+               : type === 'error' ? 'bg-white dark:bg-[#13151f] border-red-500 text-red-600 dark:text-red-400'
+               : 'bg-white dark:bg-[#13151f] border-ks-blue text-slate-800 dark:text-slate-200';
+
+      const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'alert-circle' : 'info';
+
+      toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-full border ${bg} text-xs font-bold shadow-xl backdrop-blur transform transition-all duration-300 translate-x-10 opacity-0`;
+      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i><span>${message}</span>`;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-x-10', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('translate-x-10', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function copyToClipboard(text) {
+      const dummy = document.createElement('textarea');
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
+    }
+  </script>
+</body>
+</html>
